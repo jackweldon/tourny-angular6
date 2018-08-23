@@ -1,0 +1,55 @@
+@import "~@angular/material/theming";
+@import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono);
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+
+
+@include mat-core();
+//theme definition
+$app-primary: mat-palette($mat-light-blue, 100);
+$app-secondary: mat-palette($mat-pink, 100);
+$app-warn: mat-palette($mat-red,500);
+$app-theme: mat-dark-theme($app-primary, $app-secondary, $app-warn);
+@include angular-material-theme($app-theme);
+//define typography
+$app-typography: mat-typography-config( $font-family: '"Ubuntu Mono", sans-serif', $headline: mat-typography-level(32px, 32px, 700));
+@include angular-material-typography($app-typography);
+
+
+//bootstrap 
+
+$enable-flex:               true;
+$enable-grid-classes:       true;
+
+@import '~bootstrap/scss/functions';
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/reboot";
+// ----------------------------------------------------
+// 2. Variable overrides / customisation:
+// @see: https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss
+// ----------------------------------------------------
+$grid-breakpoints: (
+  xs: 0,
+  sm: 544px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+);
+@include _assert-ascending($grid-breakpoints, "$grid-breakpoints");
+$container-max-widths: (
+  sm: 576px,
+  md: 720px,
+  lg: 940px,
+  xl: 1140px
+);
+@include _assert-ascending($container-max-widths, "$container-max-widths");  
+
+$grid-columns:                12 ;
+$grid-gutter-width:           30px;
+
+@import "~bootstrap/scss/grid";
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}

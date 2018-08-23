@@ -1,0 +1,53 @@
+<div class="mat-app-background">
+  <div class="container">
+    <h1>Create Tournament</h1>
+    <form [formGroup]="tournForm" (ngSubmit)="create()">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="form-group">
+            <mat-form-field color="primary">
+              <input matInput placeholder="name" formControlName="name" id="name" type="text" autocomplete="off">
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-form-field>
+              <input matInput [matDatepicker]="startDate" placeholder="Choose a startDate" autocomplete="off" [formControl]="date">
+              <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+              <mat-datepicker #startDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-form-field>
+              <input matInput [matDatepicker]="endDate" placeholder="Choose an End Date" min="{{tournForm.value.startDate}}" [formControl]="date"
+                autocomplete="off">
+              <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+              <mat-datepicker #endDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-form-field color="primary">
+              <input matInput placeholder="streamUrl" formControlName="streamUrl" id="streamUrl" type="text" autocomplete="off">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-12 col-md-6" *ngIf="metaComplete"  [@animationOption2]="metaComplete">
+          <h3>Leagues</h3>
+          <div class="form-group">
+            <mat-form-field class="example-full-width" color="primary">
+              <input matInput type="text" formControlName="league" autocomplete="off" placeholder="League Name" #newLeague (keyup.enter)="addLeague(newLeague)">
+              <mat-icon matSuffix fontSet="fa" fontIcon="fa-plus" (click)="addLeague(newLeague)"></mat-icon>
+            </mat-form-field>
+          </div>
+          <mat-list role="list">
+            <mat-list-item *ngFor="let league of leagues.controls" role="listitem"> {{league.value}}
+              <mat-icon matSuffix fontSet="fa" fontIcon="fa-times" (click)="removeLeague(league)"></mat-icon>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </div>
+      <div class="col-12">
+        <button mat-raised-button color="primary" type="submit" class="float-right" [disabled]="!tournForm.valid">Create Tournament</button>
+      </div>
+    </form>
+  </div>
+</div>

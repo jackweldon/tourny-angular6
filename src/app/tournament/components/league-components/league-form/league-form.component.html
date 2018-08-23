@@ -1,0 +1,48 @@
+<mat-vertical-stepper #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Add players to the league</ng-template>
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <h3>Add players to: {{model.name}}</h3>
+          <app-player-search (selected)="addPlayer($event)"></app-player-search>
+        </div>
+        <div class="col-12 col-md-6">
+          <h4 class="list-title">Current Players</h4>
+          <mat-list role="list">
+            <mat-list-item *ngFor="let player of model.players" role="listitem"> {{player.userName}}
+              <mat-icon matSuffix fontSet="fa" fontIcon="fa-times" (click)="removePlayer(player)"></mat-icon>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </div>
+      <div>
+        <button mat-button (click)="goForward(stepper)">Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Set your league options</ng-template>
+      <mat-form-field class="pairing-select">
+        <mat-select placeholder="Pairing Method" formControlName="pairingMethod" name="pairingMethod" required>
+          <mat-option *ngFor="let item of pairingMethods" [value]="item.name">
+            {{item.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    You are now done.
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>

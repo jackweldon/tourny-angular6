@@ -1,0 +1,23 @@
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+
+  <mat-error *ngIf="loginForm.errors">
+    Email or Password is incorrect.
+  </mat-error>
+  <div formGroupName="account">
+    <div class="form-group">
+      <mat-form-field color="primary">
+        <input matInput placeholder="email" formControlName="email" id="email" type="text" autocomplete="off">
+        <mat-error *ngIf="email.invalid">
+          {{getEmailErrorMessage()}}
+        </mat-error>
+        <!--<div *ngIf="email.pending">pending....</div> async example -->
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field color="accent">
+        <input matInput placeholder="password" formControlName="password" id="password" type="password" autocomplete="off">
+      </mat-form-field>
+    </div>
+  </div>
+  <button mat-raised-button color="secondary" type="submit">Login</button>
+</form>
