@@ -21,9 +21,7 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router,
     private accountService: AccountService) { }
 
-  ngOnInit() {
-    this.email.setValue('weldonjack@gmail.com');
-    this.password.setValue('Jack12.');
+  ngOnInit() { 
   
   }
 
